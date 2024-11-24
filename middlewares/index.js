@@ -17,6 +17,7 @@ const middleFunc2 = (req, res, next) => {
 };
 
 
-module.exports = [middleFunc1,middleFunc2]
+// module.exports = [middleFunc1,middleFunc2]
+module.exports = {middleFunc1,middleFunc2}
 
 /* ------------------------------------------------------- */

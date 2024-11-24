@@ -151,10 +151,11 @@ const PORT = process.env.PORT || 8000;
 
 //? destructring ederek alma:
 
-const [middleFunc1, middleFunc2] = require("./middlewares");
-app.use(middleFunc1, middleFunc2);
+// const [middleFunc1, middleFunc2] = require("./middlewares");
+const {middleFunc1, middleFunc2 }= require("./middlewares");
+// app.use(middleFunc1, middleFunc2);
 
-app.get("/ayridosyadan", (req, res) => {
+app.get("/ayridosyadan", middleFunc1, middleFunc2, (req, res) => {
   res.send({
     message1: req.message1,
     message2: req.message2,
