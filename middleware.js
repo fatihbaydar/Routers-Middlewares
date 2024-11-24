@@ -30,6 +30,10 @@ const PORT = process.env.PORT || 8000;
 
 app.get("/", (req, res, next) => {
   if (req.query.username == "baydar") {
+
+    //!req veya res ile veri taşıma
+    req.username = "baydar";
+    res.message ="çalışmak geliştirir"
     next(); // doğru is bir sonraki route'a geç
   } else {
     res.send({
@@ -40,7 +44,9 @@ app.get("/", (req, res, next) => {
 
 app.get("/", (req, res) => {
   res.send({
-    message: "Hoş geldiniz",
+    username: req.username,
+    // message: "Hoş geldiniz",
+    message:res.message
   });
 });
 
