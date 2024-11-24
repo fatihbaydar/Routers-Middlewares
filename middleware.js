@@ -99,17 +99,17 @@ const PORT = process.env.PORT || 8000;
 
 // })
 
-const middleFunc1 = (req, res, next) => {
-  console.log("middleFunc1 çalıştı");
-  req.message1 = "middleFunc1 çalıştı";
-  next();
-};
+// const middleFunc1 = (req, res, next) => {
+//   console.log("middleFunc1 çalıştı");
+//   req.message1 = "middleFunc1 çalıştı";
+//   next();
+// };
 
-const middleFunc2 = (req, res, next) => {
-  console.log("middleFunc2 çalıştı");
-  req.message2 = "middleFunc2 çalıştı";
-  next();
-};
+// const middleFunc2 = (req, res, next) => {
+//   console.log("middleFunc2 çalıştı");
+//   req.message2 = "middleFunc2 çalıştı";
+//   next();
+// };
 
 // app.use("/", middleFunc1) //! url yazılırsa sadece o url için geçerlli
 // app.use(middleFunc1, middleFunc2); //! url yazılmazsa hepsinde geçerli. mesaj consola yansır. app.use bütün metdolarda geçerli.
@@ -127,17 +127,27 @@ const middleFunc2 = (req, res, next) => {
 
 //? app.use() kullanmadan middleware çağırılması:
 
-app.get("/home", middleFunc1, middleFunc2, (req, res) => {
-    res.send({
-      message1: req.message1,
-      message2: req.message2,
-      message: "Bitti",
-    });
+// app.get("/home", middleFunc1, middleFunc2, (req, res) => {
+//     res.send({
+//       message1: req.message1,
+//       message2: req.message2,
+//       message: "Bitti",
+//     });
+//   });
+
+/* ------------------------------------------------------- */
+
+const middleFuncs = require("./middlewares");
+
+app.use(middleFuncs);
+
+app.get("/ayridosyadan", (req, res) => {
+  res.send({
+    message1: req.message1,
+    message2: req.message2,
+    message: "middleware ayrı dosyadan",
   });
-
-
-
-
+});
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
