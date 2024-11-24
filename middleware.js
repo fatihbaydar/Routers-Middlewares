@@ -112,20 +112,28 @@ const middleFunc2 = (req, res, next) => {
 };
 
 // app.use("/", middleFunc1) //! url yazılırsa sadece o url için geçerlli
-app.use(middleFunc1, middleFunc2); //! url yazılmazsa hepsinde geçerli. mesaj consola yansır. app.use bütün metdolarda geçerli.
+// app.use(middleFunc1, middleFunc2); //! url yazılmazsa hepsinde geçerli. mesaj consola yansır. app.use bütün metdolarda geçerli.
 
 //* Alternatif
 // app.get("/", [middleFunc1, middleFunc2]) //! get metodu kullanılırsa sadece get isteğinde çalışır.
 
-app.get("/home", (req, res) => {
-  res.send({
-    message1: req.message1,
-    message2: req.message2,
-    message: "Bitti",
+// app.get("/home", (req, res) => {
+//   res.send({
+//     message1: req.message1,
+//     message2: req.message2,
+//     message: "Bitti",
+//   });
+// });
+
+//? app.use() kullanmadan middleware çağırılması:
+
+app.get("/home", middleFunc1, middleFunc2, (req, res) => {
+    res.send({
+      message1: req.message1,
+      message2: req.message2,
+      message: "Bitti",
+    });
   });
-});
-
-
 
 
 
