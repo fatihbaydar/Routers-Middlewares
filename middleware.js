@@ -137,9 +137,22 @@ const PORT = process.env.PORT || 8000;
 
 /* ------------------------------------------------------- */
 
-const middleFuncs = require("./middlewares");
+// const middleFuncs = require("./middlewares");
 
-app.use(middleFuncs);
+// app.use(middleFuncs);
+
+// app.get("/ayridosyadan", (req, res) => {
+//   res.send({
+//     message1: req.message1,
+//     message2: req.message2,
+//     message: "middleware ayrı dosyadan",
+//   });
+// });
+
+//? destructring ederek alma:
+
+const [middleFunc1, middleFunc2] = require("./middlewares");
+app.use(middleFunc1, middleFunc2);
 
 app.get("/ayridosyadan", (req, res) => {
   res.send({
@@ -148,6 +161,9 @@ app.get("/ayridosyadan", (req, res) => {
     message: "middleware ayrı dosyadan",
   });
 });
+
+
+
 
 /* ------------------------------------------------------- */
 app.listen(PORT, () => console.log("Running: http://127.0.0.1:" + PORT));
